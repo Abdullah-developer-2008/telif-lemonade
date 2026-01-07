@@ -17,6 +17,7 @@ function goToSection(index) {
 }
 
 // 2. Animation Trigger
+
 function triggerAnim(id) {
     const el = document.getElementById(id);
     if (!el) return;
