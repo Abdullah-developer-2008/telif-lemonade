@@ -946,6 +946,12 @@
          font-size: 3rem;
          line-height: 1;
      }
+
+     .order-btn{
+              width: 72%;
+        height: 75%;
+        margin: 0 10px;
+     }
  }
 
  /* --- Extra Small Phones (480px) --- */
@@ -958,7 +964,4 @@
          font-size: 1.5rem;
      }
 
-     .order-btn {
-         width: 90%;
-     }
  }
