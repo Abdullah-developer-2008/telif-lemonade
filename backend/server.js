@@ -6,20 +6,26 @@ const cors = require('cors');
 require('dotenv').config();
 const User = require('./models/User');
 const Order = require('./models/Order');
+const path = require('path');
 
 const app = express();
 app.use(express.json());
 app.use(cors({
-    origin: '*',
+    origin: 'https://telif-lemonade-website.vercel.app/',
     methods: ["GET", "POST", "PATCH", "DELETE"],
     credentials: true
 }));
-
+app.use(express.static(path.join(__dirname, '../frontend')));
 // Connect to MongoDB (You can use a local string or MongoDB Atlas)
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("Connected to MongoDB"))
     .catch(err => console.log(err));
 
+
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
+});
 // Configure Email Transporter
 const transporter = nodemailer.createTransport({
     service: 'gmail',
