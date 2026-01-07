@@ -952,6 +952,8 @@
         height: 75%;
         margin: 0 10px;
      }
+    .fix-responsivness{
+     display:flex;
  }
 
  /* --- Extra Small Phones (480px) --- */
