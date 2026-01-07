@@ -7,13 +7,8 @@
     }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "backend/server.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "backend/server.js"
-    }
+    { "src": "/api/(.*)", "dest": "backend/server.js" },
+    { "src": "/images/(.*)", "dest": "/images/$1" },
+    { "src": "/(.*)", "dest": "backend/server.js" }
   ]
 }
