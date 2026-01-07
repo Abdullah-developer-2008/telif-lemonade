@@ -23,9 +23,10 @@ mongoose.connect(process.env.MONGO_URI)
 
 
 
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
 });
+
 // Configure Email Transporter
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -186,7 +187,7 @@ app.post('/api/place-order', async (req, res) => {
                     <h2 style="color: #FFB300;">Order Receipt</h2>
                     <p>Hi ${user.username}, thank you for your order!</p>
                     <hr>
-                    <ul>${itemsHtml}</ul>
+                    <ul>${itemsList}</ul>
                     <p><strong>Total: ${total}</strong></p>
                     <p><strong>Payment:</strong> ${payment.toUpperCase()}</p>
                     <p><strong>Delivery Address:</strong> ${address}</p>
@@ -223,6 +224,10 @@ app.patch('/api/update-order/:id', async (req, res) => {
     } catch (err) {
         res.status(500).json({ message: "Update failed" });
     }
+});
+
+app.get(/^(?!\/api).+/, (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
 });
 
 const connectDB = async () => {
