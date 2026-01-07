@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lemonades | Premium Drink Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@900&family=Montserrat:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/frontend/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">LEMONADES</div>
+        <div class="nav-links" id="nav-links">
+            <button onclick="goToSection(0)">Home</button>
+            <button onclick="goToSection(1)">Shakes</button>
+            <button onclick="goToSection(2)">Juices</button>
+            <button onclick="goToSection(3)">Cold Drinks</button>
+            <div id="auth-nav-area">
+                <button id="nav-login-btn" onclick="toggleAuth()">LOGIN</button>
+                <div id="user-profile-nav" style="display: none; color: white; align-items: center; gap: 15px;">
+                    <span id="nav-username" style="font-weight: bold; color: var(--yellow);"></span>
+                    <button onclick="logout()"
+                        style="background: #000000;border-radius: 20px; padding: 5px 10px; font-size: 10px;">LOGOUT</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="hamburger" id="hamburger">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </div>
+    </nav>
+
+    <main id="main-slider">
+        <section class="section home-page">
+            <div class="bg-split">
+                <div class="left-bg"></div>
+                <div class="right-bg"></div>
+            </div>
+            <div class="bg-text-wrap"><span id="txt-te">TE</span><span id="txt-lif"
+                    style="margin-left: 10vw;">LIF</span></div>
+            <div class="product-display" style="z-index: 10; margin: 0vh 30vh;">
+                <img src="/frontend/images/bg-leaf-1.png" class="main-img animate-in" style="height: 75vh;">
+                <img src="/frontend/images/hero-yellow-can.png" class="main-img animate-in" style="height: 75vh;">
+            </div>
+        </section>
+
+        <section class="section shake-page" id="shake-section">
+            <div class="content-left">
+                <h1 id="shake-title">CREAMY <br> BANANA</h1>
+                <p id="shake-desc">Pure organic milk blended with fresh sun-ripened bananas.</p>
+
+                <div class="toppings-container">
+                    <span>Extra Toppings (+$1.50)</span>
+                    <div class="toppings-grid">
+                        <label class="topping-item">
+                            <input type="checkbox" value="Cookie Crunch" onchange="toggleTopping(this)">
+                            <span class="checkmark"></span> Cookie Crunch
+                        </label>
+                        <label class="topping-item">
+                            <input type="checkbox" value="Coconut Flakes" onchange="toggleTopping(this)">
+                            <span class="checkmark"></span>Coconut Flakes
+                        </label>
+                        <label class="topping-item">
+                            <input type="checkbox" value="Choco Chips" onchange="toggleTopping(this)">
+                            <span class="checkmark"></span> Choco Chips
+                        </label>
+                    </div>
+                </div>
+
+                <div class="price-tag" id="shake-price">$12.00</div>
+
+                <button class="order-btn" onclick="addToCart()">ADD TO CART</button>
+            </div>
+            <div class="product-display">
+                <img src="/frontend/images/shakes.png" id="shake-img" class="main-img">
+            </div>
+            <div class="side-nav">
+                <button onclick="changeShake('banana')">BANANA</button>
+                <button onclick="changeShake('mango')">MANGO</button>
+                <button onclick="changeShake('berry')">BERRY</button>
+            </div>
+
+        </section>
+
+
+        <section class="section juice-page" id="juice-section">
+            <div class="content-left">
+                <h1 id="juice-title">CREAMY <br> BANANA</h1>
+                <p id="juice-desc">Pure organic milk blended with fresh sun-ripened bananas.</p>
+
+                <div class="toppings-container">
+                    <span>Extra Toppings (+$1.50)</span>
+                    <div class="toppings-grid">
+                        <label class="topping-item">
+                            <input type="checkbox" value="Fresh Mint" onchange="toggleTopping(this)">
+                            <span class="checkmark"></span> Fresh Mint
+                        </label>
+                        <label class="topping-item">
+                            <input type="checkbox" value="Honey Drop" onchange="toggleTopping(this)">
+                            <span class="checkmark"></span> Honey Drop
+                        </label>
+                        <label class="topping-item">
+                            <input type="checkbox" value="Lemon Zest" onchange="toggleTopping(this)">
+                            <span class="checkmark"></span> Lemon Zest
+                        </label>
+                    </div>
+                </div>
+
+                <div class="price-tag" id="juice-price">$12.00</div>
+
+                <button class="order-btn" onclick="addToCart()">ADD TO CART</button>
+            </div>
+            <div class="product-display">
+                <img src="/frontend/images/fresh juice.png" id="juice-img" class="main-img">
+            </div>
+            <div class="side-nav">
+                <button onclick="changeJuice('orange')">ORANGE</button>
+                <button onclick="changeJuice('apple')">APPLE</button>
+                <button onclick="changeJuice('watermelon')">MELON</button>
+            </div>
+
+        </section>
+
+        <section class="section cold-page" id="cold-section">
+            <div class="content-left">
+                <h1 id="drink-title">CREAMY <br> BANANA</h1>
+                <p id="drink-desc">Pure organic milk blended with fresh sun-ripened bananas.</p>
+
+                <div class="toppings-container">
+                    <span>Extra Toppings (+$1.50)</span>
+                    <div class="toppings-grid">
+                        <label class="topping-item">
+                            <input type="checkbox" value="Fruit Slices" onchange="toggleTopping(this)">
+                            <span class="checkmark"></span> Fruit Slices
+                        </label>
+                        <label class="topping-item">
+                            <input type="checkbox" value="Juice Pearls" onchange="toggleTopping(this)">
+                            <span class="checkmark"></span> Juice Pearls
+                        </label>
+                        <label class="topping-item">
+                            <input type="checkbox" value="Magic Color" onchange="toggleTopping(this)">
+                            <span class="checkmark"></span> Magic Color
+                        </label>
+                    </div>
+                </div>
+
+                <div class="price-tag" id="drink-price">$12.00</div>
+
+                <button class="order-btn" onclick="addToCart()" style="background: rgb(191 191 191)">ADD TO
+                    CART</button>
+            </div>
+            <div class="product-display">
+                <img src="/frontend/images/fizzy drink.png" id="drink-img" class="main-img">
+            </div>
+            <div class="side-nav">
+                <button onclick="changeFlavor('sprite')">SPRITE</button>
+                <button onclick="changeFlavor('coke')">COKE</button>
+                <button onclick="changeFlavor('fanta')">FANTA</button>
+            </div>
+
+        </section>
+
+
+    </main>
+
+    <div id="auth-modal" class="auth-overlay">
+        <div class="auth-card">
+            <button class="close-btn" onclick="toggleAuth()">×</button>
+
+            <div id="signup-form" class="auth-step">
+                <h2>Create Account</h2>
+                <div class="input-group">
+                    <input type="text" id="reg-username" placeholder="Username">
+                </div>
+                <div class="input-group">
+                    <input type="email" id="reg-email" placeholder="Email">
+                </div>
+                <div class="input-group">
+                    <input type="password" id="reg-password" placeholder="Create Password">
+                    <span class="toggle-password" onclick="togglePasswordVisibility('reg-password')">👁️</span>
+                </div>
+                <button class="auth-submit" id="signup-btn" onclick="sendOTP('reg-email', 'signup')">
+                    <span class="btn-text">SEND OTP</span>
+                    <div class="spinner"></div>
+                </button>
+                <p class="auth-toggle-text">Already have an account? <span onclick="showStep('login-form')">Login</span>
+                </p>
+            </div>
+
+            <div id="login-form" class="auth-step" style="display:none;">
+                <h2>Welcome Back</h2>
+                <div class="input-group">
+                    <input type="email" id="login-email" placeholder="Email">
+                </div>
+                <div class="input-group">
+                    <input type="password" id="login-password" placeholder="Password">
+                    <span class="toggle-password" onclick="togglePasswordVisibility('login-password')">👁️</span>
+                </div>
+                <div style="text-align: right; margin-bottom: 15px;">
+                    <span onclick="showStep('forgot-password-form')"
+                        style="cursor:pointer; font-size:12px; color:var(--yellow);">Forgot Password?</span>
+                </div>
+                <button class="auth-submit" id="login-btn" onclick="loginUser()">
+                    <span class="btn-text">LOGIN</span>
+                    <div class="spinner"></div>
+                </button>
+                <p class="auth-toggle-text">New here? <span onclick="showStep('signup-form')">Create Account</span></p>
+            </div>
+
+            <div id="forgot-password-form" class="auth-step" style="display:none;">
+                <h2>Reset Password</h2>
+                <p style="font-size:12px; color:gray; margin-bottom:15px;">Enter your email to receive a reset OTP.</p>
+                <input type="email" id="forgot-email" placeholder="Enter your Email">
+                <button class="auth-submit" id="forgot-btn" onclick="sendOTP('forgot-email', 'reset')">
+                    <span class="btn-text">SEND RESET OTP</span>
+                    <div class="spinner"></div>
+                </button>
+                <p class="auth-toggle-text"><span onclick="showStep('login-form')">Back to Login</span></p>
+            </div>
+
+            <div id="otp-form" class="auth-step" style="display:none;">
+                <h2>Verify Email</h2>
+                <p>We sent a code to your email.</p>
+                <div class="otp-container" style="display: flex; justify-content: center; gap: 5px; margin: 20px 0;">
+                    <input type="text" class="otp-input" maxlength="1" oninput="moveFocus(this, 1)">
+                    <input type="text" class="otp-input" maxlength="1" oninput="moveFocus(this, 2)">
+                    <input type="text" class="otp-input" maxlength="1" oninput="moveFocus(this, 3)">
+                    <input type="text" class="otp-input" maxlength="1" oninput="moveFocus(this, 4)">
+                    <input type="text" class="otp-input" maxlength="1" oninput="moveFocus(this, 5)">
+                    <input type="text" class="otp-input" maxlength="1" oninput="moveFocus(this, 6)">
+                </div>
+                <button class="auth-submit" id="verify-btn" onclick="verifyAccount()">
+                    <span class="btn-text">VERIFY & START</span>
+                    <div class="spinner"></div>
+                </button>
+                <p id="resend-text" style="margin-top: 15px; font-size: 13px; color: #666;">
+                    Didn't get the code? <span id="timer-link" onclick="resendOTPAction()"
+                        style="font-weight: bold; color: #999; cursor: pointer;">Wait 60s</span>
+                </p>
+            </div>
+
+            <div id="reset-final-form" class="auth-step" style="display:none;">
+                <h2>Set New Password</h2>
+                <div class="input-group">
+                    <input type="password" id="reset-new-password" placeholder="Enter New Password">
+                    <span class="toggle-password" onclick="togglePasswordVisibility('reset-new-password')">👁️</span>
+                </div>
+                <button class="auth-submit" id="final-reset-btn" onclick="saveNewPassword()">
+                    <span class="btn-text">UPDATE & LOGIN</span>
+                    <div class="spinner"></div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cart-modal" class="auth-overlay">
+        <div class="auth-card" style="width: 450px;">
+            <button class="close-btn" onclick="toggleCart()">×</button>
+            <h2>Your Basket</h2>
+            <div id="cart-items-list" style="margin: 20px 0; max-height: 300px; overflow-y: auto;">
+            </div>
+            <div class="cart-total" style="border-top: 1px solid #ddd; padding-top: 15px; font-weight: 900;">
+                Total: <span id="cart-total-price">$0.00</span>
+            </div>
+            <button class="order-btn" onclick="proceedToCheckout()"
+                style="color:white; background-color: black; width: 100%; margin-top: 20px;">
+                CHECKOUT
+            </button>
+        </div>
+        <div id="checkout-section" class="auth-step" style="display:none; padding: 20px;">
+            <h2 style="color: var(--yellow); margin-bottom: 20px;">Delivery Details</h2>
+
+            <div id="map"
+                style="height: 250px; border-radius: 15px; margin-bottom: 15px; border: 2px solid var(--yellow);"></div>
+            <p style="font-size: 10px; color: #888; margin-top: -10px;">* Click on map to set precise location</p>
+
+            <div class="input-group">
+                <input type="text" id="order-address-1" placeholder="Address Line 1 (House/Flat No.)">
+            </div>
+            <div class="input-group">
+                <input type="text" id="order-address-2" placeholder="Address Line 2 (Street/Area)">
+            </div>
+
+            <div class="input-group">
+                <select id="payment-method"
+                    style="width: 100%; padding: 12px; border-radius: 8px; background: #222; color: white; border: 1px solid #444;">
+                    <option value="cod">Cash on Delivery</option>
+                    <option value="online">Online Payment (Card/Wallet)</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <input type="text" id="order-phone" placeholder="Phone Number">
+            </div>
+
+            <button class="auth-submit" id="confirm-order-btn" onclick="processOrder()">
+                <span class="btn-text">CONFIRM ORDER</span>
+                <div class="spinner"></div>
+            </button>
+            <button onclick="backToCart()"
+                style="background:none; border:none; color:gray; cursor:pointer; margin-top:10px;">
+                Back to Basket
+            </button>
+        </div>
+    </div>
+
+    <section id="kitchen-dashboard"
+        style="display:none; padding: 100px 50px; background: #1a1a1a; min-height: 100vh; color: white;">
+        <h1 style="color: var(--yellow);">KITCHEN DASHBOARD</h1>
+        <button onclick="location.reload()"
+            style="margin-bottom: 20px; background: none; border: 1px solid white; color: white; padding: 5px 15px; cursor: pointer;">
+            ← BACK TO SHOP
+        </button>
+        <div style="overflow-x: auto; margin-top: 30px;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                <thead style="border-bottom: 2px solid var(--yellow);">
+                    <tr>
+                        <th>Time</th>
+                        <th>Customer</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+                <tbody id="orders-table-body">
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <script src="/frontend/script.js"> </script>
+</body>
+
+</html>
+
+</html>

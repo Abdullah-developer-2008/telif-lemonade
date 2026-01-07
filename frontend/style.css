@@ -1,0 +1,964 @@
+ :root {
+     --green: #008037;
+     --yellow: #FFB300;
+     --white: #ffffff;
+     --cream: #fcf5e5;
+     --brown: #5d4037;
+ }
+
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+
+ body,
+ html {
+     width: 100%;
+     height: 100%;
+     overflow: hidden;
+     font-family: 'Montserrat', sans-serif;
+     background-color: #1a1a1a;
+ }
+
+ /* --- Navigation --- */
+ nav {
+     position: fixed;
+     top: 40px;
+     width: 100%;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 0 6%;
+     z-index: 1000;
+ }
+
+ .logo {
+     font-family: 'Poppins', sans-serif;
+     font-size: 24px;
+     color: var(--white);
+     letter-spacing: 2px;
+ }
+
+ .nav-links {
+     display: flex;
+     gap: 40px;
+ }
+
+ .nav-links button {
+     background: none;
+     border: none;
+     color: rgba(255, 255, 255, 0.7);
+     font-weight: 700;
+     text-transform: uppercase;
+     font-size: 13px;
+     cursor: pointer;
+     transition: 0.3s;
+ }
+
+ .nav-links button:hover {
+     color: var(--white);
+ }
+
+ /* --- Slider Structure --- */
+ #main-slider {
+     display: flex;
+     width: 400vw;
+     height: 100vh;
+     will-change: transform;
+ }
+
+ .section {
+     width: 100vw;
+     height: 100vh;
+     flex-shrink: 0;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0 2%;
+     position: relative;
+     overflow: hidden;
+ }
+
+ /* --- Global Content Layout --- */
+ .content-left {
+     flex: 0 0 40%;
+     z-index: 10;
+     position: relative;
+ }
+
+ .content-left h1 {
+     font-family: 'Poppins';
+     font-size: 6rem;
+     line-height: 0.9;
+     margin-bottom: 20px;
+     text-transform: uppercase;
+ }
+
+ .price-tag {
+     font-size: 2.5rem;
+     font-weight: 900;
+     margin: 20px 0;
+ }
+
+ .product-display {
+     flex: 1;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100%;
+ }
+
+ .main-img {
+     max-height: 80vh;
+     width: 50vw;
+     object-fit: contain;
+     filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.3));
+     opacity: 1;
+ }
+
+ /* --- Animations --- */
+ @keyframes productEntrance {
+     0% {
+         opacity: 0;
+         transform: translateY(150px) scale(0.8) rotate(5deg);
+         filter: blur(10px);
+     }
+
+     100% {
+         opacity: 1;
+         transform: translateY(0) scale(1) rotate(0deg);
+         filter: blur(0);
+     }
+ }
+
+ @keyframes idleFloat {
+
+     0%,
+     100% {
+         transform: translateY(0);
+     }
+
+     50% {
+         transform: translateY(-20px);
+     }
+ }
+
+ .animate-in {
+     animation:
+         productEntrance 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+         idleFloat 4s ease-in-out infinite 1.2s;
+ }
+
+ /* --- Section Themes --- */
+ .home-page {
+     padding: 0;
+     justify-content: center;
+ }
+
+ .bg-split {
+     position: absolute;
+     width: 100%;
+     height: 100%;
+     display: flex;
+     z-index: 1;
+ }
+
+ .left-bg {
+     width: 50%;
+     background-color: var(--green);
+ }
+
+ .right-bg {
+     width: 50%;
+     background-color: var(--yellow);
+ }
+
+ .bg-text-wrap {
+     position: absolute;
+     z-index: 2;
+     font-family: 'Poppins';
+     font-size: 28vw;
+     color: var(--white);
+     pointer-events: none;
+     display: flex;
+ }
+
+ .shake-page {
+     background-color: var(--cream);
+     color: var(--brown);
+     transition: background 0.6s;
+ }
+
+ .juice-page {
+     background-color: #ff9800;
+     color: #fff;
+     transition: background 0.6s;
+ }
+
+ .cold-page {
+     background-color: #0d1117;
+     color: #fff;
+ }
+
+ /* --- Buttons --- */
+ .side-nav {
+     display: flex;
+     flex-direction: column;
+     gap: 15px;
+     z-index: 20;
+ }
+
+ .side-nav button {
+     background: rgba(255, 255, 255, 0.1);
+     border: 1px solid currentColor;
+     padding: 10px 20px;
+     font-weight: 700;
+     cursor: pointer;
+     color: inherit;
+ }
+
+ .size-picker {
+     display: flex;
+     gap: 10px;
+     margin: 20px 0;
+ }
+
+ .size-btn {
+     padding: 8px 15px;
+     border: 2px solid rgba(255, 255, 255, 0.3);
+     background: transparent;
+     color: inherit;
+     cursor: pointer;
+     border-radius: 50px;
+ }
+
+ .size-btn.active {
+     background: white;
+     color: black;
+     border-color: white;
+ }
+
+ .order-btn {
+     padding: 15px 40px;
+     background: currentColor;
+     color: #000;
+     border: none;
+     font-weight: 900;
+     cursor: pointer;
+     border-radius: 5px;
+ }
+
+ .shake-page .order-btn {
+     background: var(--brown);
+     color: #fff;
+ }
+
+ .auth-overlay {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background: rgba(0, 0, 0, 0.8);
+     backdrop-filter: blur(10px);
+     display: none;
+     justify-content: center;
+     align-items: center;
+     z-index: 2000;
+ }
+
+ .auth-card {
+     background: white;
+     padding: 40px;
+     width: 400px;
+     border-radius: 20px;
+     position: relative;
+     text-align: center;
+     color: #333;
+ }
+
+ .auth-step h2 {
+     margin-bottom: 20px;
+     font-family: 'Poppins';
+ }
+
+ .auth-step input {
+     width: 100%;
+     padding: 12px;
+     margin: 10px 0;
+     border: 1px solid #ddd;
+     border-radius: 8px;
+     font-size: 1rem;
+ }
+
+ .otp-inputs {
+     display: flex;
+     gap: 10px;
+     justify-content: center;
+     margin: 20px 0;
+ }
+
+ .otp-digit {
+     width: 45px !important;
+     text-align: center;
+     font-size: 1.5rem;
+     font-weight: bold;
+ }
+
+ .auth-submit {
+     width: 100%;
+     padding: 15px;
+     background: #000;
+     color: #fff;
+     border: none;
+     border-radius: 8px;
+     font-weight: 700;
+     cursor: pointer;
+     margin-top: 15px;
+ }
+
+ .close-btn {
+     position: absolute;
+     top: 15px;
+     right: 20px;
+     font-size: 25px;
+     border: none;
+     background: none;
+     cursor: pointer;
+ }
+
+ /* Spinner Animation */
+ @keyframes spin {
+     0% {
+         transform: rotate(0deg);
+     }
+
+     100% {
+         transform: rotate(360deg);
+     }
+ }
+
+ .spinner {
+     display: none;
+     /* Hidden by default */
+     width: 20px;
+     height: 20px;
+     border: 3px solid rgba(255, 255, 255, 0.3);
+     border-radius: 50%;
+     border-top-color: #fff;
+     animation: spin 1s ease-in-out infinite;
+     margin-left: 10px;
+ }
+
+ /* State when button is "Loading" */
+ .auth-submit.loading {
+     pointer-events: none;
+     /* Disable clicks */
+     opacity: 0.8;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .auth-submit.loading .spinner {
+     display: inline-block;
+ }
+
+ .cart-item {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 10px 0;
+     border-bottom: 1px solid #eee;
+ }
+
+ .cart-count-badge {
+     background: var(--yellow);
+     color: #000;
+     font-size: 10px;
+     padding: 2px 6px;
+     border-radius: 50%;
+     position: relative;
+     top: -10px;
+     left: -5px;
+ }
+
+ .toppings-container {
+     margin: 20px 0;
+     text-align: left;
+ }
+
+ .toppings-container span {
+     font-size: 12px;
+     font-weight: 700;
+     text-transform: uppercase;
+     letter-spacing: 1px;
+     color: inherit;
+     opacity: 0.7;
+ }
+
+ .toppings-grid {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: 10px;
+     margin-top: 10px;
+ }
+
+ /* Fix for the checkmark visibility */
+ .topping-item {
+     display: flex;
+     align-items: center;
+     font-size: 13px;
+     cursor: pointer;
+     position: relative;
+     padding-left: 30px;
+     /* Increased padding */
+     color: inherit;
+     /* Ensures it takes the section text color */
+ }
+
+ .checkmark {
+     position: absolute;
+     left: 0;
+     height: 18px;
+     width: 18px;
+     background-color: rgba(0, 0, 0, 0.05);
+     border: 2px solid currentColor;
+     border-radius: 4px;
+     transition: 0.2s;
+ }
+
+ /* Show checkmark when checked */
+ .topping-item input:checked~.checkmark {
+     background-color: var(--yellow);
+     border-color: var(--yellow);
+ }
+
+ .checkmark:after {
+     content: "";
+     position: absolute;
+     display: none;
+     left: 5px;
+     top: 1px;
+     width: 5px;
+     height: 10px;
+     border: solid black;
+     border-width: 0 2px 2px 0;
+     transform: rotate(45deg);
+ }
+
+ .topping-item input:checked~.checkmark:after {
+     display: block;
+     /* Shows the actual check mark */
+ }
+
+ .topping-item input {
+     position: absolute;
+     opacity: 0;
+     cursor: pointer;
+ }
+
+ /* Custom Checkmark */
+ .checkmark {
+     position: absolute;
+     left: 0;
+     height: 16px;
+     width: 16px;
+     background-color: rgba(255, 255, 255, 0.1);
+     border: 1px solid currentColor;
+     border-radius: 3px;
+ }
+
+ .topping-item input:checked~.checkmark {
+     background-color: var(--yellow);
+     border-color: var(--yellow);
+ }
+
+ .topping-item input:checked~.checkmark:after {
+     content: "✓";
+     position: absolute;
+     color: #000;
+     font-size: 12px;
+     left: 2px;
+     top: -1px;
+ }
+
+ #timer-link {
+     transition: color 0.3s ease;
+ }
+
+ #timer-link:hover {
+     text-decoration: underline;
+ }
+
+ .input-group {
+     position: relative;
+     margin-bottom: 15px;
+ }
+
+ .input-group input {
+     width: 100%;
+     padding-right: 40px;
+     /* Space for the eye */
+ }
+
+ .toggle-password {
+     position: absolute;
+     right: 12px;
+     top: 50%;
+     transform: translateY(-50%);
+     cursor: pointer;
+     font-size: 14px;
+     opacity: 0.6;
+ }
+
+ .auth-toggle-text {
+     margin-top: 20px;
+     font-size: 13px;
+     color: #888;
+ }
+
+ .auth-toggle-text span {
+     color: var(--yellow);
+     cursor: pointer;
+     font-weight: bold;
+ }
+
+ /* Spinner Base Styling */
+ .spinner {
+     display: none;
+     width: 20px;
+     height: 20px;
+     border: 3px solid rgba(255, 255, 255, 0.3);
+     border-radius: 50%;
+     border-top-color: #fff;
+     animation: spin 1s ease-in-out infinite;
+     margin: 0 auto;
+ }
+
+ @keyframes spin {
+     to {
+         transform: rotate(360deg);
+     }
+ }
+
+ /* Loading State: Hide text, show spinner */
+ .auth-submit.loading .btn-text {
+     display: none;
+ }
+
+ .auth-submit.loading .spinner {
+     display: block;
+ }
+
+ /* Make Resend link look like it's loading too */
+ #timer-link.loading {
+     pointer-events: none;
+     opacity: 0.5;
+ }
+
+ /* Container for text and spinner */
+ .auth-submit {
+     position: relative;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .spinner {
+     display: none;
+     width: 20px;
+     height: 20px;
+     border: 3px solid rgba(255, 255, 255, 0.3);
+     border-top: 3px solid white;
+     border-radius: 50%;
+     animation: spin 0.8s linear infinite;
+ }
+
+ @keyframes spin {
+     to {
+         transform: rotate(360deg);
+     }
+ }
+
+ /* Toggle visibility when loading */
+ .auth-submit.loading .btn-text {
+     visibility: hidden;
+ }
+
+ .auth-submit.loading .spinner {
+     display: block;
+     position: absolute;
+ }
+
+
+ #kitchen-dashboard {
+     font-family: 'Montserrat', sans-serif;
+ }
+
+ #kitchen-dashboard table {
+     background: #222;
+     border-radius: 10px;
+     padding: 20px;
+ }
+
+ #kitchen-dashboard th {
+     padding: 15px;
+     color: var(--yellow);
+     text-transform: uppercase;
+ }
+
+ .badge {
+     background: #444;
+     padding: 2px 8px;
+     border-radius: 10px;
+     font-size: 11px;
+     margin-right: 5px;
+ }
+
+ /* General Navbar Styles */
+ .navbar {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 1rem 5%;
+     /* Side padding is 5% of screen width */
+     background-color: #000;
+     color: #fff;
+     position: sticky;
+     top: 0;
+     z-index: 1000;
+ }
+
+ .logo {
+     font-size: 1.5rem;
+     font-weight: bold;
+     color: #facc15;
+     /* Lemon Yellow */
+ }
+
+ .nav-links {
+     display: flex;
+     list-style: none;
+     gap: 3vw;
+     /* Spacing shrinks with screen width */
+     transition: all 0.3s ease;
+ }
+
+ .nav-links a {
+     color: #fff;
+     text-decoration: none;
+     transition: 0.3s;
+ }
+
+ .nav-links a:hover {
+     color: #facc15;
+ }
+
+ /* Hamburger Icon Styles */
+ .hamburger {
+     display: none;
+     /* Hidden on Desktop */
+     flex-direction: column;
+     cursor: pointer;
+     gap: 5px;
+ }
+
+ .line {
+     width: 25px;
+     height: 3px;
+     background-color: #fff;
+     transition: 0.4s;
+ }
+
+ /* Responsive Styles (Mobile) */
+ @media screen and (max-width: 864px) {
+     .hamburger {
+         display: flex;
+     }
+
+     .nav-links {
+         position: fixed;
+         top: 70px;
+         right: -100%;
+         /* Hidden by default */
+         flex-direction: column;
+         background-color: #111;
+
+         /* Your specific requested sizes */
+         width: 29%;
+         min-width: 180px;
+         /* Crucial: prevents it from getting too thin on small phones */
+         height: auto;
+         /* Auto is safer, but if you want 21vh, see below */
+         min-height: 21vh;
+
+         text-align: center;
+         padding: 20px;
+         gap: 15px;
+         /* Spacing between links in the column */
+         border-radius: 0 0 0 10px;
+         /* Optional: adds a nice curve to the bottom left */
+         transition: 0.5s ease;
+         z-index: 2000;
+     }
+
+     .nav-links.active {
+         right: 0;
+         /* Slides in to show the box */
+     }
+
+     /* Animation for the "X" */
+     .hamburger.active .line:nth-child(1) {
+         transform: rotate(45deg) translate(5px, 6px);
+     }
+
+     .hamburger.active .line:nth-child(2) {
+         opacity: 0;
+     }
+
+     .hamburger.active .line:nth-child(3) {
+         transform: rotate(-45deg) translate(5px, -6px);
+     }
+
+ }
+
+ @media screen and (max-width: 1180px) {
+    /* 1. Reduce the massive side margins on the product display */
+    .product-display {
+        margin: 0 10vw !important; /* Shrunk from 30vh to 10vw */
+        width: 80%;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    /* 2. Scale the images down so they don't hit the top/bottom of the screen */
+    .main-img {
+        height: 60vh !important; /* Shrunk from 75vh */
+        width: auto;
+        object-fit: contain;
+    }
+
+    /* 3. Adjust the background text so it doesn't overlap the product too much */
+    .bg-text-wrap {
+        font-size: 22vw; /* Slightly smaller than 25vw */
+    }
+
+    #txt-lif {
+        margin-left: 5vw !important; /* Reduced from 10vw */
+    }
+}
+
+/* 4. The Mobile Flip (768px and below) */
+@media screen and (max-width: 768px) {
+    .home-page {
+        flex-direction: column;
+    }
+
+    .bg-split {
+        flex-direction: column;
+    }
+
+    .left-bg, .right-bg {
+        width: 100%;
+        height: 50%;
+    }
+
+    .bg-text-wrap {
+        flex-direction: column;
+        font-size: 35vw;
+        line-height: 0.8;
+    }
+
+    #txt-lif {
+        margin-left: 0 !important;
+    }
+
+    .product-display {
+        margin: 0 !important;
+        width: 100%;
+    }
+
+    .product-display .main-img {
+        height: 45vh !important;
+    }
+}
+
+@media screen and (max-width: 864px) {
+    /* 1. Fix the Section Layout */
+    .home-page {
+        flex-direction: column; /* Stack elements top-to-bottom */
+        padding: 0;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    /* 2. Fix the Split Background (Top & Bottom on mobile) */
+    .bg-split {
+        flex-direction: column; /* Green on top, Yellow on bottom */
+    }
+    .left-bg, .right-bg {
+        width: 100%;
+        height: 50%; /* Each takes half the height instead of width */
+    }
+
+    /* 3. Fix the Big "TE LIF" Background Text */
+    .bg-text-wrap {
+        flex-direction: column; /* Stack TE on top of LIF */
+        font-size: 40vw; /* Make it huge but fitting */
+        line-height: 0.8;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Perfectly centered */
+        text-align: center;
+    }
+
+    #txt-lif {
+        margin-left: 0 !important; /* Remove the 10vw gap on mobile */
+    }
+
+    /* 4. Fix the Product Display (The Images) */
+    .product-display {
+        margin: 0 !important; /* Remove the 30vh margin that breaks mobile */
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column; /* Stack leaf and can */
+        align-items: center;
+        gap: 20px;
+    }
+
+    .product-display .main-img {
+        height: 40vh !important; /* Shrink images so they fit the screen */
+        width: auto;
+        max-width: 80%;
+    }
+}
+
+ /* --- Global Section Fixes --- */
+ .section {
+     display: flex;
+     flex-direction: row;
+     /* Default side-by-side */
+     align-items: center;
+     justify-content: space-around;
+     padding: 5vh 5vw;
+     min-height: 100vh;
+     overflow: hidden;
+     position: relative;
+ }
+
+ /* --- Home Page Specifics --- */
+ .bg-text-wrap {
+     position: absolute;
+     width: 100%;
+     text-align: center;
+     font-size: 25vw;
+     /* Font size scales with screen width */
+     font-weight: 900;
+     opacity: 0.1;
+     z-index: 1;
+     pointer-events: none;
+ }
+
+ .product-display {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     position: relative;
+     width: 50%;
+ }
+
+ .main-img {
+     max-width: 100%;
+     height: auto;
+     /* Keeps ratio */
+     max-height: 70vh;
+     /* Limits height on tall screens */
+     object-fit: contain;
+ }
+
+ /* --- Responsive Tablet/Mobile (864px and below) --- */
+ @media screen and (max-width: 864px) {
+     .section {
+         flex-direction: column;
+         /* Stack vertically */
+         justify-content: center;
+         text-align: center;
+         padding-top: 80px;
+         /* Space for your navbar */
+     }
+
+     /* Make text container full width */
+     .content-left {
+         width: 100%;
+         order: 2;
+         /* Put text below the image on mobile */
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+     }
+
+     /* Make product display full width */
+     .product-display {
+         width: 100%;
+         order: 1;
+         /* Image appears first */
+         margin: 20px 0 !important;
+     }
+
+     .main-img {
+         max-height: 40vh;
+         /* Shrink image on mobile to save space */
+     }
+
+     /* Fix the Big Background Text */
+     #txt-lif {
+         margin-left: 0 !important;
+         /* Center it on mobile */
+     }
+
+     .bg-text-wrap {
+         font-size: 35vw;
+         top: 20%;
+     }
+
+     /* Fix side navigation buttons (Move them to a horizontal row) */
+     .side-nav {
+         position: static;
+         flex-direction: row;
+         gap: 10px;
+         margin-top: 20px;
+         order: 3;
+     }
+
+     /* Fix the toppings grid */
+     .toppings-grid {
+         grid-template-columns: 1fr;
+         /* Stack toppings 1 by 1 */
+         gap: 5px;
+     }
+
+     /* Hero Text Sizes */
+     .content-left h1 {
+         font-size: 3rem;
+         line-height: 1;
+     }
+ }
+
+ /* --- Extra Small Phones (480px) --- */
+ @media screen and (max-width: 480px) {
+     h1 {
+         font-size: 2.2rem;
+     }
+
+     .price-tag {
+         font-size: 1.5rem;
+     }
+
+     .order-btn {
+         width: 90%;
+     }
+ }
