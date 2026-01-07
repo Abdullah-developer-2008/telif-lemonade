@@ -2,7 +2,7 @@
 let currentProduct = {
     name: "Banana Shake",
     price: 12.00,
-    img: "/images/banana shake.png",
+    img: "images/banana shake.png",
     flavor: "Banana",
     description: "Pure organic milk blended with fresh sun-ripened bananas."
 };
@@ -27,9 +27,9 @@ function triggerAnim(id) {
 
 // 3. Shake Data & Logic
 const shakeData = {
-    banana: { title: "CREAMY <br> BANANA", bg: "#fcf5e5", img: "/images/banana shake.png" },
-    mango: { title: "TROPICAL <br> MANGO", bg: "#fff3cc", img: "/images/mango shake.png" },
-    berry: { title: "WILD <br> BERRY", bg: "#ffe4e1", img: "/images/berry shake.png" }
+    banana: { title: "CREAMY <br> BANANA", bg: "#fcf5e5", img: "images/banana shake.png" },
+    mango: { title: "TROPICAL <br> MANGO", bg: "#fff3cc", img: "images/mango shake.png" },
+    berry: { title: "WILD <br> BERRY", bg: "#ffe4e1", img: "images/berry shake.png" }
 };
 
 function changeShake(type) {
@@ -49,9 +49,9 @@ function changeShake(type) {
 
 // 4. Juice Data & Logic
 const juiceData = {
-    orange: { title: "FRESH <br> ORANGE", bg: "#ff9800", img: "/images/orange juice.png", price: "$8.00" },
-    apple: { title: "CRISP <br> APPLE", bg: "#8bc34a", img: "/images/apple juice.png", price: "$9.00" },
-    watermelon: { title: "SWEET <br> MELON", bg: "#e91e63", img: "/images/Melon juice.png", price: "$10.50" }
+    orange: { title: "FRESH <br> ORANGE", bg: "#ff9800", img: "images/orange juice.png", price: "$8.00" },
+    apple: { title: "CRISP <br> APPLE", bg: "#8bc34a", img: "images/apple juice.png", price: "$9.00" },
+    watermelon: { title: "SWEET <br> MELON", bg: "#e91e63", img: "images/Melon juice.png", price: "$10.50" }
 };
 
 function changeJuice(type) {
@@ -72,9 +72,9 @@ function changeJuice(type) {
 
 // 5. Cold Drink Logic
 const drinkData = {
-    sprite: { title: "FRESH <br> SPRITE", desc: "Lemon-lime refreshment.", base: 2.50, img: "/images/sprite.png" },
-    coke: { title: "CLASSIC <br> COKE", desc: "The original cola taste.", base: 2.50, img: "/images/cola.png" },
-    fanta: { title: "ORANGE <br> FANTA", desc: "Bright and bubbly orange.", base: 2.50, img: "/images/fanta.png" }
+    sprite: { title: "FRESH <br> SPRITE", desc: "Lemon-lime refreshment.", base: 2.50, img: "images/sprite.png" },
+    coke: { title: "CLASSIC <br> COKE", desc: "The original cola taste.", base: 2.50, img: "images/cola.png" },
+    fanta: { title: "ORANGE <br> FANTA", desc: "Bright and bubbly orange.", base: 2.50, img: "images/fanta.png" }
 };
 
 let currentFlavor = 'sprite';
